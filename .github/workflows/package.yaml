@@ -17,7 +17,7 @@ jobs:
         run: |
           echo '::set-output name=artifact_path::packages/${{ inputs.type }}/dist'
           echo '::set-output name=dockerfile::./packages/${{ inputs.type }}/Dockerfile'
-          echo '::set-output name=image::ghcr.io/ortelius/backstage/${{ inputs.type }}:0.0.1'
+          echo '::set-output name=image::ghcr.io/ortelius/backstage/${{ inputs.type }}'
 
       - name: Checkout
         uses: actions/checkout@v2
