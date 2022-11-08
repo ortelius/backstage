@@ -16,7 +16,7 @@ jobs:
         id: variables
         run: |
           echo '::set-output name=artifact_path::packages/${{ inputs.type }}/dist'
-          echo '::set-output name=dockerfile::./dockerfile.${{ inputs.type }}'
+          echo '::set-output name=dockerfile::./packages/${{ inputs.type }}/Dockerfile'
           echo '::set-output name=image::ghcr.io/${{ github.repository }}/${{ inputs.type }}'
 
       - name: Checkout
@@ -53,7 +53,10 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            
+
+      - run: pwd
+      - run: ls ./packages/${{ inputs.type }}
+
       - name: Docker build
         id: docker_build
         uses: docker/build-push-action@v2
