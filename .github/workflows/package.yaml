@@ -53,7 +53,7 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v3
         with:
-          images: ${{ steps.variables.outputs.image }}:0.0.1
+          images: ${{ steps.variables.outputs.image }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
