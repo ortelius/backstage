@@ -43,10 +43,8 @@ jobs:
 
       - name: Build & Push Docker Image
         run: |
-          echo ${{ steps.variables.outputs.image }}
-          REPO_OWNER=`echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]'`
-          docker build -t ghcr.io/${REPO_OWNER}/backstage/{{ inputs.type }}:0.0.1 -f ${{ steps.variables.outputs.dockerfile }} .
-          docker push ghcr.io/${REPO_OWNER}/backstage/{{ inputs.type }}:0.0.1
+          docker build -t ${{ steps.variables.outputs.image }}:0.0.1 -f ${{ steps.variables.outputs.dockerfile }} .
+          docker push ${{ steps.variables.outputs.image }}:0.0.1
 
       - name: Set up Docker metadata
         id: metadata
