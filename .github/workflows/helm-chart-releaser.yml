@@ -10,7 +10,7 @@ on:
 jobs:
   release:
     # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
-    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
+    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-HELM_INDEXER_TOKEN
     permissions:
       contents: write # needed to write releases
       packages: write # needed for ghcr access
@@ -35,7 +35,7 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.4.1
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_TOKEN: "${{ secrets.HELM_INDEXER_TOKEN }}"
 
       # see https://github.com/helm/chart-releaser/issues/183
       - name: Login to GitHub Container Registry
@@ -43,7 +43,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.HELM_INDEXER_TOKEN }}
 
       - uses: sigstore/cosign-installer@main
       - name: Push charts to GHCR
