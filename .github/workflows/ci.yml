@@ -39,12 +39,12 @@ jobs:
     - run: yarn build
 
     - name: Upload app artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: app
-          path: packages/app/dist
-          retention-days: 5
-          if-no-files-found: error
+      uses: actions/upload-artifact@v2
+      with:
+        name: app
+        path: packages/app/dist
+        retention-days: 5
+        if-no-files-found: error
 
     - name: Upload backend artifact
       uses: actions/upload-artifact@v2
@@ -62,7 +62,7 @@ jobs:
     #     docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     # - name: Build the Docker image
-    #   run: |- 
+    #   run: |-
     #     docker build . --file Dockerfile --tag ortelius/backstage:0.0.1
 
     # - name: Run Trivy vulnerability scanner
@@ -74,7 +74,7 @@ jobs:
     #     ignore-unfixed: true
     #     vuln-type: 'os,library'
     #     severity: 'CRITICAL'
-      
+
     # - name: Docker Push
     #   run: |-
     #     docker push ortelius/backstage:0.0.1
@@ -85,7 +85,7 @@ jobs:
     uses: ./.github/workflows/package.yaml
     with:
       type: app
-      
+
   package-backend:
     name: Package backend
     needs: build
