@@ -1,6 +1,6 @@
 FROM nginx:mainline
 
-LABEL org.opencontainers.image.source=https://github.com/ortelius/backstage
+LABEL org.opencontainers.image.source=https://github.com/ortelius/backstage/packages/app
 LABEL org.opencontainers.image.description="Ortelius Backstage Frontend"
 
 RUN apt-get update && apt-get -y install jq && rm -rf /var/lib/apt/lists/*
