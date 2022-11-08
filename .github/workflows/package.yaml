@@ -62,7 +62,7 @@ jobs:
       - name: Build and Push Docker Image
         env:
           REGISTRY: ghcr.io
-          OWNER: ortelius
+          OWNER: bradmccoydev
           IMAGE_NAME: ${{ github.repository }}
         uses: docker/build-push-action@v2
         with:
@@ -71,7 +71,7 @@ jobs:
           #target: final
           push: true
           tags: |
-            ghcr.io/ortelius/backstage:0.0.1
+            ghcr.io/bradmccoydev/${{ github.repository }}:0.0.1
           build-args: |
             ENVIRONMENT=production
 
