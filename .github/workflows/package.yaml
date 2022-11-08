@@ -32,7 +32,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           registry: ghcr.io
-          username: ortelius
+          username: ${{ github.actor }}
           password: ${{ env.GITHUB_TOKEN }}
 
       - name: Download artifact
