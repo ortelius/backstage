@@ -7,9 +7,6 @@ on:
         required: true
         type: string
 
-env:
-  GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
-
 jobs:
   package:
     name: Package
@@ -31,12 +28,16 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Login to GitHub Container Registry
-        if: github.event_name != 'pull_request'
+      #- run: echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u bradmccoydev --password-stdin
+
+      - name: Login to GitHub Container registry
         uses: docker/login-action@v1
+        env:
+          GITHUB_USER: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: $GITHUB_USER
           password: ${{ env.GITHUB_TOKEN }}
 
       - name: Download artifact
