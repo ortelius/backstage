@@ -8,7 +8,7 @@ on:
         type: string
 
 env:
-  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
 
 jobs:
   package:
@@ -49,8 +49,7 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v3
         with:
-          #images: ${{ steps.variables.outputs.image }}
-          images: bradmccoydev/backstage:${{ inputs.type }}
+          images: ${{ steps.variables.outputs.image }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
