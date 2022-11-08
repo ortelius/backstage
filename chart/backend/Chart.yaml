@@ -8,7 +8,7 @@ version: 0.0.1
 appVersion: "0.0.1"
 
 home: "https://ortelius.io"
-#icon: "update"
+icon: https://backstage.io/img/twitter-summary.png
 sources:
   - "https://github.com/ortelius/backstage"
 annotations:
@@ -22,3 +22,6 @@ keywords:
   - cd
   - ortelius
   - catalog
+maintainers:
+- email: bradmccoydev@gmail.com
+  name: bradmccoydev

@@ -2,35 +2,6 @@ replicaCount: 1
 
 secretRef: keptn-secret
 
-flux:
-  namespace: flux-system
-
-  provider:
-    groupVersionResource:
-      group: notification.toolkit.fluxcd.io
-      version: v1beta1
-      resource: providers
-
-  demo:
-    enabled: false
-    apps:
-    - name: podtato-head
-      namespace: podtato-kustomize
-      kind: Kustomization
-      labels:
-        keptnProject: gsoc
-        keptnService: podtato-head
-        keptnStage: qa
-        keptnType: sh.keptn.event.qa.delivery.triggered 
-      matchLabels:
-        app.kubernetes.io/name: podtato-head
-      integrationUrl: http://backstage.flux-system.svc.cluster.local:80
-
-keptn:
-  install: false
-  version: 0.18.0
-  url: https://keptn.ortelius.io/api/v1/event
-
 image:
   repository: bradmccoydev/backstage
   pullPolicy: Always

@@ -1,8 +1,10 @@
 name: CI
 
 on:
+  pull_request:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 permissions:
   id-token: write
@@ -29,30 +31,64 @@ jobs:
         node-version: "16"
         cache: yarn
 
-    - name: Install dependencies
-      run: yarn && yarn tsc && yarn build
+    - run: yarn install --immutable --immutable-cache --check-cache
+    - run: yarn tsc
+    - run: yarn prettier:check
+    - run: yarn lint:all
+    - run: yarn test:all
+    - run: yarn build
 
-    - name: docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Upload app artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: packages/app/dist
+          retention-days: 5
+          if-no-files-found: error
 
-    - name: Build the Docker image
-      run: |- 
-        docker build . --file Dockerfile --tag ortelius/backstage:0.0.1
-
-    - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@master
+    - name: Upload backend artifact
+      uses: actions/upload-artifact@v2
       with:
-        image-ref: 'ortelius/backstage:0.0.1'
-        format: 'table'
-        exit-code: '0'
-        ignore-unfixed: true
-        vuln-type: 'os,library'
-        severity: 'CRITICAL'
+        name: backend
+        path: packages/backend/dist
+        retention-days: 5
+        if-no-files-found: error
+
+    # - name: docker login
+    #   env:
+    #     DOCKER_USER: ${{secrets.DOCKER_USER}}
+    #     DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+    #   run: |
+    #     docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+    # - name: Build the Docker image
+    #   run: |- 
+    #     docker build . --file Dockerfile --tag ortelius/backstage:0.0.1
+
+    # - name: Run Trivy vulnerability scanner
+    #   uses: aquasecurity/trivy-action@master
+    #   with:
+    #     image-ref: 'ortelius/backstage:0.0.1'
+    #     format: 'table'
+    #     exit-code: '0'
+    #     ignore-unfixed: true
+    #     vuln-type: 'os,library'
+    #     severity: 'CRITICAL'
       
-    - name: Docker Push
-      run: |-
-        docker push ortelius/backstage:0.0.1
+    # - name: Docker Push
+    #   run: |-
+    #     docker push ortelius/backstage:0.0.1
+
+  package-app:
+    name: Package app
+    needs: build
+    uses: ./.github/workflows/package.yaml
+    with:
+      type: app
+      
+  package-backend:
+    name: Package backend
+    needs: build
+    uses: ./.github/workflows/package.yaml
+    with:
+      type: backend
