@@ -9,11 +9,6 @@ on:
 
 jobs:
   package:
-    permissions:
-      contents: write # needed to write releases
-      packages: write # needed for ghcr access
-      id-token: write # needed for keyless signing
-
     name: Package
     runs-on: ubuntu-latest
     steps:
