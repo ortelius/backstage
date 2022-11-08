@@ -71,7 +71,7 @@ jobs:
           #target: final
           push: true
           tags: |
-            ghcr.io/ortelius/backstage/app:0.0.1
+            ghcr.io/ortelius/backstage:0.0.1
           build-args: |
             ENVIRONMENT=production
 
