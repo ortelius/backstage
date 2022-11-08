@@ -68,7 +68,7 @@ jobs:
         with:
           context: .
           file: ${{ steps.variables.outputs.dockerfile }}
-          target: final
+          #target: final
           push: true
           tags: |
             ghcr.io/ortelius/backstage/app:0.0.1
