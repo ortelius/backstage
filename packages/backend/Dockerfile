@@ -11,7 +11,7 @@
 
 FROM node:16-bullseye-slim
 
-LABEL org.opencontainers.image.source=https://github.com/ortelius/backstage
+LABEL org.opencontainers.image.source=https://github.com/ortelius/backstage/packages/backend
 LABEL org.opencontainers.image.description="Ortelius Backstage Backend"
 
 # Install sqlite3 dependencies. You can skip this if you don't use sqlite3 in the image,
