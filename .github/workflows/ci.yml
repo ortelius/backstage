@@ -68,8 +68,8 @@ jobs:
 
     - name: Build & Push Docker Image
       run: |
-        docker build -t ghcr.io/ortelius/backstage/app:0.0.1 -f ./packages/app/Dockerfile .
-        docker build -t ghcr.io/ortelius/backstage/backend:0.0.1 -f ./packages/backend/Dockerfile .
+        DOCKER_BUILDKIT=1 docker build -t ghcr.io/ortelius/backstage/app:0.0.1 -f ./packages/app/Dockerfile .
+        DOCKER_BUILDKIT=1 docker build -t ghcr.io/ortelius/backstage/backend:0.0.1 -f ./packages/backend/Dockerfile .
         docker push ghcr.io/ortelius/backstage/app:0.0.1
         docker push ghcr.io/ortelius/backstage/backend:0.0.1
 
