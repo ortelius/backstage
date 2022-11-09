@@ -23,6 +23,12 @@ data:
   GITHUB_TOKEN:
 ```
 
+To Create the secret for ghcr
+
+```bash
+kubectl create secret docker-registry ghcr --docker-server=ghcr.io --docker-username=bradmccoydev --docker-password=<enter-here> --docker-email=bradmccoydev@gmail.com -n backstage
+```
+
 ### 2. Add Helm Repo
 
 ```bash
