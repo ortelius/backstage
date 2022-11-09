@@ -6,13 +6,14 @@ fullnameOverride: ""
 app:
   image:
     # -- App image repository.
-    repository: ghcr.io/mcwarman/backstage-sample-app/app
+    repository: ghcr.io/ortelius/backstage/app
     # -- App image tag @default -- `{{ .Chart.AppVersion }}`
-    tag: ""
+    tag: "0.0.1"
     # -- App image pull policy.
     pullPolicy: IfNotPresent
     # -- App image pull secrets.
-    pullSecrets: []
+    pullSecrets:
+      - name: ghcr
 
   serviceAccount:
     # -- App if `true`, create a new service account.
@@ -82,7 +83,7 @@ app:
 
   ingress:
     # -- App if `true`, create an ingress object.
-    enabled: false
+    enabled: true
     # -- App ingress annotations.
     annotations:
       kubernetes.io/ingress.class: nginx
@@ -127,14 +128,14 @@ app:
 backend:
   image:
     # -- Backend image repository.
-    repository: ghcr.io/mcwarman/backstage-sample-app/backend
+    repository: ghcr.io/ortelius/backstage/backend
     # -- Backend image tag @default -- `{{ .Chart.AppVersion }}`
-    tag: ""
+    tag: "0.0.1"
     # -- Backend image pull policy.
     pullPolicy: IfNotPresent
     # -- Backend image pull secrets.
-    pullSecrets: []
-
+    pullSecrets:
+      - name: ghcr
 
   serviceAccount:
     # -- Backend if `true`, create a new service account.
@@ -169,7 +170,8 @@ backend:
   podAnnotations: {}
 
   # -- Backend labels to add to the pod.
-  podLabels: {}
+  podLabels:
+    app.kubernetes.io/component: backend
 
   # -- Backend security context for the container.
   securityContext: {}
@@ -259,7 +261,7 @@ postgresql:
 # @default -- see values.yaml
 appConfig:
   app:
-    title: Scaffoled Backstage App
+    title: Ortelius Backstage
     baseUrl: http://localhost:8080
   organization: {}
   backend:
