@@ -47,28 +47,28 @@ jobs:
           docker build -t ${{ steps.variables.outputs.image }}:0.0.1 -f ${{ steps.variables.outputs.dockerfile }} .
           docker push ${{ steps.variables.outputs.image }}:0.0.1
 
-      - name: Set up Docker metadata
-        id: metadata
-        uses: docker/metadata-action@v3
-        with:
-          images: ${{ steps.variables.outputs.image }}
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+      # - name: Set up Docker metadata
+      #   id: metadata
+      #   uses: docker/metadata-action@v3
+      #   with:
+      #     images: ${{ steps.variables.outputs.image }}
+      #     tags: |
+      #       type=ref,event=branch
+      #       type=ref,event=pr
+      #       type=semver,pattern={{version}}
+      #       type=semver,pattern={{major}}.{{minor}}
+      #       type=semver,pattern={{major}}
 
-      - name: Docker build
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ${{ steps.variables.outputs.dockerfile }}
-          platforms: linux/amd64
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.metadata.outputs.tags }}
-          labels: ${{ steps.metadata.outputs.labels }}
+      # - name: Docker build
+      #   id: docker_build
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     file: ${{ steps.variables.outputs.dockerfile }}
+      #     platforms: linux/amd64
+      #     push: ${{ github.event_name != 'pull_request' }}
+      #     tags: ${{ steps.metadata.outputs.tags }}
+      #     labels: ${{ steps.metadata.outputs.labels }}
 
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+      # - name: Image digest
+      #   run: echo ${{ steps.docker_build.outputs.digest }}
