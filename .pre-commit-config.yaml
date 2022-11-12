@@ -13,8 +13,3 @@ repos:
     rev: "0.14.0"
     hooks:
       - id: check-github-workflows
-  - repo: https://github.com/jumanjihouse/pre-commit-hooks
-    rev: "2.1.6"
-    hooks:
-      - id: shellcheck
-        args: [--severity=error]
