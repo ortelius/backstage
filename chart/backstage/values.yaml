@@ -170,8 +170,8 @@ backend:
   podAnnotations: {}
 
   # -- Backend labels to add to the pod.
-  podLabels:
-    app.kubernetes.io/component: backend
+  podLabels: {}
+    #app.kubernetes.io/component: backend
 
   # -- Backend security context for the container.
   securityContext: {}
