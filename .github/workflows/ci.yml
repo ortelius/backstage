@@ -68,8 +68,8 @@ jobs:
 
     - name: Build & Push Docker Image
       run: |
-        DOCKER_BUILDKIT=1 docker build -t ghcr.io/ortelius/backstage/app:0.0.1 -f ./packages/app/Dockerfile .
-        DOCKER_BUILDKIT=1 docker build -t ghcr.io/ortelius/backstage/backend:0.0.1 -f ./packages/backend/Dockerfile .
+        DOCKER_BUILDKIT=1 docker build -t ghcr.io/ortelius/backstage/app:0.0.1 -f ./Dockerfile.app .
+        DOCKER_BUILDKIT=1 docker build -t ghcr.io/ortelius/backstage/backend:0.0.1 -f ./Dockerfile.backend .
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
