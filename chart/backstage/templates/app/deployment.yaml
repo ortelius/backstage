@@ -48,7 +48,7 @@ spec:
             {{- end }}
             {{- if .Values.appConfig.app.baseUrl }}
             - name: APP_CONFIG_app_baseUrl
-              value: http://localhost:8080
+              value: {{ .Values.appConfig.app.baseUrl | quote }}
             {{- end }}
             {{- if .Values.appConfig.backend.baseUrl }}
             - name: APP_CONFIG_backend_baseUrl

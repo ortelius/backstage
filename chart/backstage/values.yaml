@@ -246,12 +246,12 @@ backend:
 
 # -- Settings are only required if you wish to use an existing postgresql instance
 psql:
-  # host: postgresdb.local
-  # port: 5432
-  # username: backstage
-  # password:
-  #   secret: backstage-postgres
-  #   key: password
+  host: postgresql.postgres.svc.cluster.local
+  port: 5432
+  username: backstage
+  password:
+    secret: postgres-secrets
+    key: POSTGRES_PASSWORD
 
 postgresql:
    # -- If `true`, executes subchart PostgreSQL from Bitnami, [reference](https://artifacthub.io/packages/helm/bitnami/postgresql).
@@ -262,14 +262,15 @@ postgresql:
 appConfig:
   app:
     title: Ortelius Backstage
-    baseUrl: http://localhost:8080
-  organization: {}
+    baseUrl: https://backstage.ortelius.io
+  organization:
+    name: ortelius
   backend:
-    baseUrl: http://localhost:8080
+    baseUrl: https://backstage.ortelius.io
     listen:
       port: 7007
     cors:
-      origin: http://localhost:8080
+      origin: https://backstage.ortelius.io
       methods: [GET, POST, PUT, DELETE]
       credentials: true
     database:
