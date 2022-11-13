@@ -61,10 +61,6 @@ spec:
             - name: http
               containerPort: {{ .Values.appConfig.backend.listen.port | default 7007 }}
               protocol: TCP
-          # livenessProbe:
-          #   {{- toYaml .Values.backend.livenessProbe | nindent 12 }}
-          # readinessProbe:
-          #   {{- toYaml .Values.backend.readinessProbe | nindent 12 }}
           volumeMounts:
             - mountPath: /app/app-config.yaml
               name: config
