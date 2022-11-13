@@ -1,0 +1,266 @@
+NAME: backstage-1668315274
+LAST DEPLOYED: Sun Nov 13 14:54:36 2022
+NAMESPACE: backstage
+STATUS: pending-install
+REVISION: 1
+TEST SUITE: None
+HOOKS:
+MANIFEST:
+---
+# Source: backstage/templates/app/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: backstage-1668315274-app
+  labels:
+    helm.sh/chart: backstage-0.0.5
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: backstage-1668315274
+    app.kubernetes.io/version: "0.0.5"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: app
+---
+# Source: backstage/templates/backend/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: backstage-1668315274-backend
+  labels:
+    helm.sh/chart: backstage-0.0.5
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: backstage-1668315274
+    app.kubernetes.io/version: "0.0.5"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: backstage/templates/backend/configmap-app.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backstage-1668315274-backend-app-config
+  labels:
+    helm.sh/chart: backstage-0.0.5
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: backstage-1668315274
+    app.kubernetes.io/version: "0.0.5"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: backend
+data:
+  app-config.yaml: |
+    app:
+      baseUrl: https://backstage.ortelius.io
+      title: Ortelius Backstage
+    backend:
+      baseUrl: https://backstage.ortelius.io
+      cors:
+        credentials: true
+        methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        origin: https://backstage.ortelius.io
+      database:
+        client: pg
+        connection:
+          host: ${POSTGRES_HOST}
+          password: ${POSTGRES_PASSWORD}
+          port: ${POSTGRES_PORT}
+          user: ${POSTGRES_USER}
+      listen:
+        port: 7007
+    organization:
+      name: ortelius
+    techdocs:
+      builder: external
+---
+# Source: backstage/templates/app/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backstage-1668315274-app
+  labels:
+    helm.sh/chart: backstage-0.0.5
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: backstage-1668315274
+    app.kubernetes.io/version: "0.0.5"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: app
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: backstage-1668315274
+    app.kubernetes.io/component: app
+---
+# Source: backstage/templates/backend/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backstage-1668315274-backend
+  labels:
+    helm.sh/chart: backstage-0.0.5
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: backstage-1668315274
+    app.kubernetes.io/version: "0.0.5"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: backend
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: backstage-1668315274
+    app.kubernetes.io/component: backend
+---
+# Source: backstage/templates/app/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backstage-1668315274-app
+  labels:
+    helm.sh/chart: backstage-0.0.5
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: backstage-1668315274
+    app.kubernetes.io/version: "0.0.5"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backstage
+      app.kubernetes.io/instance: backstage-1668315274
+      app.kubernetes.io/component: app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: backstage
+        app.kubernetes.io/instance: backstage-1668315274
+        app.kubernetes.io/component: app
+    spec:
+      imagePullSecrets:
+        - name: ghcr
+      serviceAccountName: backstage-1668315274-app
+      containers:
+        - name: backstage
+          image: ghcr.io/ortelius/backstage/app:0.0.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_CONFIG_app_title
+              value: "Ortelius Backstage"
+            - name: APP_CONFIG_app_baseUrl
+              value: "https://backstage.ortelius.io"
+            - name: APP_CONFIG_backend_baseUrl
+              value: "https://backstage.ortelius.io"
+            - name: APP_CONFIG_organization_name
+              value: "ortelius"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthcheck
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: http
+---
+# Source: backstage/templates/backend/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backstage-1668315274-backend
+  labels:
+    helm.sh/chart: backstage-0.0.5
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: backstage-1668315274
+    app.kubernetes.io/version: "0.0.5"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backstage
+      app.kubernetes.io/instance: backstage-1668315274
+      app.kubernetes.io/component: backend
+  template:
+    metadata:
+      annotations:
+        checksum/config: ac83634e11f74bd1221ae6b9fa311700cdb8a8c781c425a1787ac8b804c45c7e
+      labels:
+        app.kubernetes.io/name: backstage
+        app.kubernetes.io/instance: backstage-1668315274
+        app.kubernetes.io/component: backend
+    spec:
+      imagePullSecrets:
+        - name: ghcr
+      serviceAccountName: backstage-1668315274-backend
+      containers:
+        - name: backstage
+          image: ghcr.io/ortelius/backstage/backend:0.0.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_HOST
+              value: "postgresql.postgres.svc.cluster.local"
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_USER
+              value: "backstage"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: POSTGRES_PASSWORD
+          ports:
+            - name: http
+              containerPort: 7007
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app/app-config.yaml
+              name: config
+              subPath: app-config.yaml
+      volumes:
+        - name: config
+          configMap:
+            name: backstage-1668315274-backend-app-config
+---
+# Source: backstage/templates/app/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backstage-1668315274-app
+  labels:
+    helm.sh/chart: backstage-0.0.5
+    app.kubernetes.io/name: backstage
+    app.kubernetes.io/instance: backstage-1668315274
+    app.kubernetes.io/version: "0.0.5"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: app
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+spec:
+  rules:
+    - host: "backstage.ortelius.io"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backstage-1668315274-app
+                port:
+                  number: 80
