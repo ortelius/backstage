@@ -54,6 +54,11 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.psql.password.secret }}
                   key: {{ .Values.psql.password.key }}
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: backstage-secrets
+                  key: GITHUB_TOKEN
             {{- with .Values.backend.env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
