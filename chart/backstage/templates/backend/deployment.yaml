@@ -43,23 +43,6 @@ spec:
           image: {{ include "backstage.backendImage" . }}
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           env:
-            {{- if .Values.postgresql.enabled }}
-            - name: POSTGRES_HOST
-              value: {{ include "backstage.postgresql.fullname" . | quote }}
-            - name: POSTGRES_PORT
-              value: {{ .Values.postgresql.primary.service.ports.postgresql | default "5432" | quote }}
-            - name: POSTGRES_USER
-              value: {{ .Values.postgresql.auth.username | quote }}
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  {{- if .Values.postgresql.existingSecret }}
-                  name:  {{ .Values.postgresql.existingSecret }}
-                  {{- else }}
-                  name:  {{ include "backstage.postgresql.fullname" . }}
-                  {{- end }}
-                  key: password
-            {{- else if .Values.psql }}
             - name: POSTGRES_HOST
               value: {{ .Values.psql.host | quote }}
             - name: POSTGRES_PORT
@@ -71,7 +54,6 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.psql.password.secret }}
                   key: {{ .Values.psql.password.key }}
-            {{- end }}
             {{- with .Values.backend.env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -79,10 +61,10 @@ spec:
             - name: http
               containerPort: {{ .Values.appConfig.backend.listen.port | default 7007 }}
               protocol: TCP
-          livenessProbe:
-            {{- toYaml .Values.backend.livenessProbe | nindent 12 }}
-          readinessProbe:
-            {{- toYaml .Values.backend.readinessProbe | nindent 12 }}
+          # livenessProbe:
+          #   {{- toYaml .Values.backend.livenessProbe | nindent 12 }}
+          # readinessProbe:
+          #   {{- toYaml .Values.backend.readinessProbe | nindent 12 }}
           volumeMounts:
             - mountPath: /app/app-config.yaml
               name: config
