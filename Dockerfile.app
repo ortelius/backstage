@@ -17,6 +17,8 @@ COPY packages/app/docker/inject-config.sh /docker-entrypoint.d/40-inject-config.
 RUN set -eu; \
   chmod +x /docker-entrypoint.d/40-inject-config.sh
 
+ENV NODE_ENV production
+
 ENV PORT 80
 
 # stage1 - build react app first

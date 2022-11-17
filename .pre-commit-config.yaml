@@ -4,9 +4,9 @@ repos:
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
-      - id: check-json
+      #- id: check-json
       #- id: check-yaml
-        args: [--allow-multiple-documents]
+        #args: [--allow-multiple-documents]
       - id: detect-aws-credentials
         args: [--allow-missing-credentials]
   - repo: https://github.com/python-jsonschema/check-jsonschema
