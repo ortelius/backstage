@@ -12,7 +12,7 @@ backend:
   # auth:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
-  baseUrl: https://backstage-backend.ortelius.ioß
+  baseUrl: https://backstage-backend.ortelius.io
   listen:
     port: 7007
     # Uncomment the following host directive to bind to all IPv4 interfaces and
