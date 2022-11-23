@@ -2,6 +2,14 @@ app:
   # Should be the same as backend.baseUrl when using the `app-backend` plugin.
   baseUrl: https://backstage-backend.ortelius.io
 
+auth:
+  environment: production
+  providers:
+    github:
+      development:
+        clientId: ${GITHUB_CLIENT_ID}
+        clientSecret: ${GITHUB_CLIENT_SECRET}
+
 backend:
   # Note that the baseUrl should be the URL that the browser and other clients
   # should use when communicating with the backend, i.e. it needs to be
