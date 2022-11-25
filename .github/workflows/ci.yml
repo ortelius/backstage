@@ -66,7 +66,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ env.GITHUB_TOKEN }}
 
-    - name: Build & Push Docker Image
+    - name: Build Docker Image
       run: |
         DOCKER_BUILDKIT=1 docker build -t ghcr.io/ortelius/backstage/app:0.0.1 -f ./Dockerfile.app .
         DOCKER_BUILDKIT=1 docker build -t ghcr.io/ortelius/backstage/backend:0.0.1 -f ./Dockerfile.backend .

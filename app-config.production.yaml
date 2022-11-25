@@ -1,6 +1,6 @@
 app:
   # Should be the same as backend.baseUrl when using the `app-backend` plugin.
-  baseUrl: https://backstage-backend.ortelius.io
+  baseUrl: https://backstage.ortelius.io
 
 auth:
   environment: production
@@ -16,7 +16,7 @@ backend:
   # reachable not just from within the backend host, but from all of your
   # callers. When its value is "http://localhost:7007", it's strictly private
   # and can't be reached by others.
-  baseUrl: https://backstage-backend.ortelius.io
+  baseUrl: https://backstage-backend.ortelius.io/api
   listen:
     port: 7007
     # The following host directive binds to all IPv4 interfaces when its value
@@ -34,6 +34,22 @@ backend:
       port: ${POSTGRES_PORT}
       user: ${POSTGRES_USER}
       password: ${POSTGRES_PASSWORD}
+    knexConfig:
+      pool:
+        min: 3
+        max: 12
+        acquireTimeoutMillis: 60000
+        createTimeoutMillis: 30000
+        destroyTimeoutMillis: 5000
+        idleTimeoutMillis: 60000
+        reapIntervalMillis: 1000
+        createRetryIntervalMillis: 200
+        propagateCreateError: false
+
+    # plugin:
+    #   auth:
+    #     connection:
+    #       database: pg_auth_set_by_user
       # https://node-postgres.com/features/ssl
       # you can set the sslmode configuration option via the `PGSSLMODE` environment variable
       # see https://www.postgresql.org/docs/current/libpq-ssl.html Table 33.1. SSL Mode Descriptions (e.g. require)
