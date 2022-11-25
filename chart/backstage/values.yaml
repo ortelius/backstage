@@ -246,7 +246,7 @@ backend:
 
 # -- Settings are only required if you wish to use an existing postgresql instance
 psql:
-  host: postgresql.postgres.svc.cluster.local
+  host: backstage-dev.cdlwn75w6jqv.ap-southeast-2.rds.amazonaws.com
   port: 5432
   username: backstage
   password:
