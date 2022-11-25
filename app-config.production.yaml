@@ -16,7 +16,7 @@ backend:
   # reachable not just from within the backend host, but from all of your
   # callers. When its value is "http://localhost:7007", it's strictly private
   # and can't be reached by others.
-  baseUrl: https://backstage-backend.ortelius.io/api
+  baseUrl: https://backstage-backend.ortelius.io
   listen:
     port: 7007
     # The following host directive binds to all IPv4 interfaces when its value
