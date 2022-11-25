@@ -36,8 +36,8 @@ backend:
       password: ${POSTGRES_PASSWORD}
     knexConfig:
       pool:
-        min: 3
-        max: 12
+        min: 15
+        max: 30
         acquireTimeoutMillis: 60000
         createTimeoutMillis: 30000
         destroyTimeoutMillis: 5000
