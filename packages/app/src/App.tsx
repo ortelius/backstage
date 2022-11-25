@@ -39,7 +39,7 @@ import { SignInProviderConfig, SignInPage } from '@backstage/core-components';
 const githubProvider: SignInProviderConfig = {
   id: 'github-auth-provider',
   title: 'GitHub',
-  message: 'Sign in using GitHub',
+  message: 'Sign in using Basiq GitHub',
   apiRef: githubAuthApiRef,
 };
 
