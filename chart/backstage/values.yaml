@@ -87,8 +87,6 @@ app:
     # -- App ingress annotations.
     annotations:
       kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/backend-protocol: HTTP
-      nginx.ingress.kubernetes.io/ssl-passthrough: "false"
 
     ingressClassName: ""
     # -- App ingress hosts.
