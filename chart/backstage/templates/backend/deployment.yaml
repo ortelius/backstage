@@ -44,7 +44,10 @@ spec:
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           env:
             - name: POSTGRES_CONNECTION_STRING
-              value: {{ .Values.psql.connectionString | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.psql.connectionString.secret }}
+                  key: {{ .Values.psql.connectionString.key }}
             - name: POSTGRES_HOST
               value: {{ .Values.psql.host | quote }}
             - name: POSTGRES_PORT
