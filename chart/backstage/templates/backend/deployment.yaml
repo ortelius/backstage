@@ -43,6 +43,8 @@ spec:
           image: {{ include "backstage.backendImage" . }}
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           env:
+            - name: POSTGRES_CONNECTION_STRING
+              value: {{ .Values.psql.connectionString | quote }}
             - name: POSTGRES_HOST
               value: {{ .Values.psql.host | quote }}
             - name: POSTGRES_PORT
