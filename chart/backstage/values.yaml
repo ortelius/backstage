@@ -250,6 +250,9 @@ psql:
   password:
     secret: postgres-secrets
     key: POSTGRES_PASSWORD
+  connectionString:
+    secret: postgres-secrets
+    key: POSTGRES_CONNECTION_STRING
 
 postgresql:
    # -- If `true`, executes subchart PostgreSQL from Bitnami, [reference](https://artifacthub.io/packages/helm/bitnami/postgresql).
