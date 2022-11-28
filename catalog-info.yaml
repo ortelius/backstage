@@ -1,13 +1,22 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ortelius
-  description: Ortelius Backstage application.
-  # Example for optional annotations
-  # annotations:
-  #   github.com/project-slug: ortelius/backstage
-  #   backstage.io/techdocs-ref: dir:.
+  name: ortelius-www
+  annotations:
+    'backstage.io/kubernetes-id': ortelius-www
 spec:
-  type: website
-  owner: bradmccoydev@gmail.com
+  type: service
+  owner: user:guest
   lifecycle: experimental
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ortelius-docs
+  annotations:
+    'backstage.io/kubernetes-id': ortelius-docs
+spec:
+  type: service
+  owner: user:guest
+  lifecycle: experimental
+---

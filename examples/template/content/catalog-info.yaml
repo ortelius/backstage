@@ -18,25 +18,3 @@ spec:
     picture: https://avatars.githubusercontent.com/u/25817813?v=4
   memberOf: [devsecops]
 ---
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: ortelius-www
-  annotations:
-    'backstage.io/kubernetes-id': ortelius-www
-spec:
-  type: service
-  owner: user:guest
-  lifecycle: experimental
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: ortelius-docs
-  annotations:
-    'backstage.io/kubernetes-id': ortelius-docs
-spec:
-  type: service
-  owner: user:guest
-  lifecycle: experimental
----
