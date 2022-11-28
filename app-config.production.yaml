@@ -47,14 +47,17 @@ backend:
         propagateCreateError: false
 
 kubernetes:
-  serviceLocatorMethod: 'multiTenant'
+  serviceLocatorMethod:
+    type: 'multiTenant'
   clusterLocatorMethods:
-    - 'config'
-  clusters:
-    - url: ${KUBERNETES_URL}
-      name: aks
-      serviceAccountToken: ${KUBERNETES_TOKEN}
-      authProvider: 'serviceAccount'
+    - type: 'config'
+      clusters:
+        - url: ${KUBERNETES_URL}
+          name: aks
+          serviceAccountToken: ${KUBERNETES_TOKEN}
+          authProvider: 'serviceAccount'
+          skipTLSVerify: true
+          skipMetricsLookup: true
 
     # plugin:
     #   auth:
