@@ -55,8 +55,7 @@ import {
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
-// TODO BM uncomment
-// import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
+import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -168,9 +167,9 @@ const serviceEntityPage = (
       {techdocsContent}
     </EntityLayout.Route>
 
-    {/* <EntityLayout.Route path="/kubernetes" title="Kubernetes">
+    <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent refreshIntervalMs={30000} />
-    </EntityLayout.Route> */}
+    </EntityLayout.Route>
 
   </EntityLayout>
 );
