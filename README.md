@@ -1,10 +1,7 @@
-# [Backstage](https://backstage.io)
+# [Ortelius Backstage Portal](https://backstage.ortelius.io)
 
-This is your newly scaffolded Backstage App, Good Luck!
+This repo is for the Ortelius Backstage Portal.
 
-To start the app, run:
+## Disclaimer 🚧
 
-```sh
-yarn install
-yarn dev
-```
+This portal is work in work in progress the first release will be on 15-Dec-22
