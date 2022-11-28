@@ -20,3 +20,14 @@ spec:
   owner: user:guest
   lifecycle: experimental
 ---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ingress-nginx
+  annotations:
+    'backstage.io/kubernetes-id': ingress-nginx
+spec:
+  type: service
+  owner: user:guest
+  lifecycle: experimental
+---
