@@ -59,6 +59,17 @@ kubernetes:
           skipTLSVerify: true
           skipMetricsLookup: true
 
+proxy:
+  '/argocd/api':
+    target: ${ARGOCD_BASE_URL}/api/v1/
+    changeOrigin: true
+    secure: false
+    headers:
+      Cookie:
+        $env: ${ARGOCD_AUTH_TOKEN}
+argocd:
+  baseUrl: ${ARGOCD_BASE_URL}
+
     # plugin:
     #   auth:
     #     connection:
