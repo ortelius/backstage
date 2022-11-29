@@ -1,5 +1,5 @@
 app:
-  title: Scaffolded Backstage App
+  title: Ortelius Catalog
   baseUrl: https://backstage.ortelius.io
 
 organization:
