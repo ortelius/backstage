@@ -84,6 +84,16 @@ spec:
                 secretKeyRef:
                   name: backstage-secrets
                   key: KUBERNETES_TOKEN
+            - name: ARGOCD_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: backstage-secrets
+                  key: ARGOCD_URL
+            - name: ARGOCD_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: backstage-secrets
+                  key: ARGOCD_AUTH_TOKEN
             {{- with .Values.backend.env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}

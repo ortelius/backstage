@@ -4,8 +4,8 @@ description: A Helm chart for the Ortelius Backstage Instance
 
 type: application
 
-version: 0.0.14
-appVersion: "0.0.14"
+version: 0.0.15
+appVersion: "0.0.15"
 
 home: "https://ortelius.io"
 icon: https://backstage.io/img/twitter-summary.png

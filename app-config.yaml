@@ -62,17 +62,14 @@ integrations:
 
 proxy:
   '/argocd/api':
-    # url to the api of your hosted argoCD instance
-    target: https://argocd.ortelius.io/api/v1/
+    target: ${ARGOCD_BASE_URL}/api/v1/
     changeOrigin: true
-    # this line is required if your hosted argoCD instance has self-signed certificate
     secure: false
     headers:
       Cookie:
-        $env: ARGOCD_AUTH_TOKEN
-
+        $env: ${ARGOCD_AUTH_TOKEN}
 argocd:
-  baseUrl: https://argocd.ortelius.io
+  baseUrl: ${ARGOCD_BASE_URL}
 
 # Reference documentation http://backstage.io/docs/features/techdocs/configuration
 # Note: After experimenting with basic setup, use CI/CD to generate docs
