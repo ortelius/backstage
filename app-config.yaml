@@ -60,16 +60,14 @@ integrations:
     #   apiBaseUrl: https://ghe.example.net/api/v3
     #   token: ${GHE_TOKEN}
 
-proxy:
-  '/argocd/api':
-    target: ${ARGOCD_BASE_URL}/api/v1/
-    changeOrigin: true
-    secure: false
-    headers:
-      Cookie:
-        $env: ${ARGOCD_AUTH_TOKEN}
 argocd:
-  baseUrl: ${ARGOCD_BASE_URL}
+  username: ${ARGOCD_USERNAME}
+  password: ${ARGOCD_PASSWORD}
+  appLocatorMethods:
+    - type: 'config'
+      instances:
+        - name: production
+          url: ${ARGOCD_BASE_URL}
 
 # Reference documentation http://backstage.io/docs/features/techdocs/configuration
 # Note: After experimenting with basic setup, use CI/CD to generate docs
