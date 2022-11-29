@@ -88,7 +88,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: backstage-secrets
-                  key: ARGOCD_URL
+                  key: ARGOCD_BASE_URL
             - name: ARGOCD_USERNAME
               valueFrom:
                 secretKeyRef:
