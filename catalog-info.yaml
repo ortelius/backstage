@@ -26,6 +26,7 @@ metadata:
   name: ingress-nginx
   annotations:
     'backstage.io/kubernetes-id': ingress-nginx
+    'argocd/app-name': ingress-nginx
 spec:
   type: service
   owner: user:guest
