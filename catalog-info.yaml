@@ -7,7 +7,7 @@ metadata:
 spec:
   type: service
   owner: user:guest
-  lifecycle: experimental
+  lifecycle: production
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -18,17 +18,20 @@ metadata:
 spec:
   type: service
   owner: user:guest
-  lifecycle: experimental
+  lifecycle: production
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ingress-nginx
+  description: Ortelius Cluster Ingress
   annotations:
     'backstage.io/kubernetes-id': ingress-nginx
     'argocd/app-name': ingress-nginx
+  tags:
+    - platform
 spec:
   type: service
   owner: user:guest
-  lifecycle: experimental
+  lifecycle: production
 ---
