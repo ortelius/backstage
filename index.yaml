@@ -7,6 +7,34 @@ entries:
         - name: support
           url: https://github.com/backstage/backstage/issues
     apiVersion: v2
+    appVersion: 0.0.15
+    created: "2022-11-29T00:29:13.433091697Z"
+    description: A Helm chart for the Ortelius Backstage Instance
+    digest: 38b2aa0ec7206f5ae5446be1ba06c1e33fcebf04f12af13cd7f62c2c904a0314
+    home: https://ortelius.io
+    icon: https://backstage.io/img/twitter-summary.png
+    keywords:
+    - cloud-native
+    - microservice
+    - cd
+    - ortelius
+    - catalog
+    maintainers:
+    - email: bradmccoydev@gmail.com
+      name: bradmccoydev
+    name: backstage
+    sources:
+    - https://github.com/ortelius/backstage
+    type: application
+    urls:
+    - https://github.com/ortelius/backstage/releases/download/backstage-0.0.15/backstage-0.0.15.tgz
+    version: 0.0.15
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: support
+          url: https://github.com/backstage/backstage/issues
+    apiVersion: v2
     appVersion: 0.0.14
     created: "2022-11-28T10:37:45.611839775Z"
     description: A Helm chart for the Ortelius Backstage Instance
@@ -393,4 +421,4 @@ entries:
     urls:
     - https://github.com/ortelius/backstage/releases/download/backstage-0.0.1/backstage-0.0.1.tgz
     version: 0.0.1
-generated: "2022-11-28T10:37:45.61218097Z"
+generated: "2022-11-29T00:29:13.433435399Z"
