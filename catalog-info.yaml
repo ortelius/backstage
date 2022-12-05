@@ -1,3 +1,4 @@
+---
 apiVersion: backstage.io/v1alpha1
 kind: Domain
 metadata:
@@ -44,7 +45,8 @@ metadata:
     'backstage.io/kubernetes-id': ortelius-docs
   tags:
     - platform
-  - url: https://docs.ortelius.io/
+  links:
+    - url: https://docs.ortelius.io/
       title: Docs
       icon: dashboard
       type: admin-dashboard
