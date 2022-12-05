@@ -1,21 +1,3 @@
----
-apiVersion: backstage.io/v1alpha1
-kind: Domain
-metadata:
-  name: engineering
-  description: Platform Specific
-spec:
-  owner: user:guest
----
-apiVersion: backstage.io/v1alpha1
-kind: System
-metadata:
-  name: platform
-  description: Platform
-spec:
-  owner: user:guest
-  domain: engineering
----
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -34,7 +16,6 @@ spec:
   type: service
   owner: user:guest
   lifecycle: production
-  system: platform
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -54,7 +35,6 @@ spec:
   type: service
   owner: user:guest
   lifecycle: production
-  system: platform
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -70,5 +50,4 @@ spec:
   type: service
   owner: user:guest
   lifecycle: production
-  system: platform
 ---
