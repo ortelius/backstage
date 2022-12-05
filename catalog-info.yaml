@@ -1,24 +1,58 @@
 apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: engineering
+  description: Platform Specific
+spec:
+  owner: user:guest
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: platform
+  description: Platform
+spec:
+  owner: user:guest
+  domain: engineering
+---
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ortelius-www
+  description: Ortelius Website
   annotations:
     'backstage.io/kubernetes-id': ortelius-www
+  tags:
+    - platform
+  links:
+    - url: https://ortelius.io/
+      title: Website
+      icon: dashboard
+      type: admin-dashboard
 spec:
   type: service
   owner: user:guest
   lifecycle: production
+  system: platform
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ortelius-docs
+  description: Ortelius Docs
   annotations:
     'backstage.io/kubernetes-id': ortelius-docs
+  tags:
+    - platform
+  - url: https://docs.ortelius.io/
+      title: Docs
+      icon: dashboard
+      type: admin-dashboard
 spec:
   type: service
   owner: user:guest
   lifecycle: production
+  system: platform
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -34,4 +68,5 @@ spec:
   type: service
   owner: user:guest
   lifecycle: production
+  system: platform
 ---

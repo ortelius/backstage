@@ -6,7 +6,7 @@ auth:
   environment: production
   providers:
     github:
-      production:
+      development:
         clientId: ${GITHUB_CLIENT_ID}
         clientSecret: ${GITHUB_CLIENT_SECRET}
 
