@@ -1,4 +1,37 @@
 apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: gitops
+  description: gitops
+spec:
+  owner: user:guest
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: gitops
+  description: gitops
+spec:
+  owner: gitops
+  domain: user:guest
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: Backstage Database
+  description: Backstage Postgresql Database
+  annotations:
+    github.com/project-slug: ortelius/ortelius-kubernetes
+    github.com/project-readme-path: README.md
+  tags:
+    - platform
+  spec:
+    type: database
+    owner: user:guest
+    system: gitops
+    lifecycle: production
+---
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ortelius-www
