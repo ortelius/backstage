@@ -1,6 +1,8 @@
 app:
-  # Should be the same as backend.baseUrl when using the `app-backend` plugin.
+  title: Ortelius
   baseUrl: https://backstage.ortelius.io
+organization:
+  name: Basiq
 
 auth:
   environment: production
@@ -9,6 +11,11 @@ auth:
       development:
         clientId: ${GITHUB_CLIENT_ID}
         clientSecret: ${GITHUB_CLIENT_SECRET}
+    integrations:
+      github:
+        - host: github.com
+          apps:
+            - $include: github-app-backstage-ortelius-credentials.yaml
 
 backend:
   # Note that the baseUrl should be the URL that the browser and other clients
@@ -53,7 +60,7 @@ kubernetes:
     - type: 'config'
       clusters:
         - url: ${KUBERNETES_URL}
-          name: aks
+          name: AKS
           serviceAccountToken: ${KUBERNETES_TOKEN}
           authProvider: 'serviceAccount'
           skipTLSVerify: true
