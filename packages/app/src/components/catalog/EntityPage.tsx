@@ -56,6 +56,19 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
+import {
+  EntityGithubGroupPullRequestsCard,
+  isGithubTeamPullRequestsAvailable,
+  EntityGithubPullRequestsContent,
+  isGithubPullRequestsAvailable,
+} from '@roadiehq/backstage-plugin-github-pull-requests';
+
+import {
+  SecurityInsightsWidget,
+  DependabotAlertsWidget,
+  EntitySecurityInsightsContent,
+  isSecurityInsightsAvailable,
+} from '@roadiehq/backstage-plugin-security-insights';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -128,6 +141,23 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+
+    <EntitySwitch>
+      <EntitySwitch.Case if={isSecurityInsightsAvailable}>
+        <Grid item md={6}>
+          <SecurityInsightsWidget/>
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+
+    <EntitySwitch>
+      <EntitySwitch.Case if={isSecurityInsightsAvailable}>
+        <Grid item md={6}>
+          <DependabotAlertsWidget />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+
   </Grid>
 );
 
@@ -140,6 +170,23 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
       {cicdContent}
     </EntityLayout.Route>
+
+    <EntityLayout.Route
+      path="/pull-requests"
+      title="Pull Requests"
+      if={isGithubPullRequestsAvailable}
+    >
+      <EntityGithubPullRequestsContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route
+      path="/security-insights"
+      title="Security Insights"
+      if={isSecurityInsightsAvailable}
+    >
+      <EntitySecurityInsightsContent />
+    </EntityLayout.Route>
+
 
     <EntityLayout.Route path="/api" title="API">
       <Grid container spacing={3} alignItems="stretch">
@@ -299,6 +346,13 @@ const groupPage = (
         <Grid item xs={12}>
           <EntityMembersListCard />
         </Grid>
+        <EntitySwitch>
+      <EntitySwitch.Case if={isGithubTeamPullRequestsAvailable}>
+        <Grid item md={5} xs={12}>
+          <EntityGithubGroupPullRequestsCard/>
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
       </Grid>
     </EntityLayout.Route>
   </EntityLayout>

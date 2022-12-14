@@ -4,7 +4,10 @@ metadata:
   name: ortelius-www
   description: Ortelius Website
   annotations:
-    'backstage.io/kubernetes-id': ortelius-www
+    github.com/project-slug: ortelius/website
+    github.com/project-readme-path: README.md
+    backstage.io/kubernetes-id: ortelius-www
+    argocd/app-name: ingress-nginx
   tags:
     - platform
   links:
@@ -23,7 +26,9 @@ metadata:
   name: ortelius-docs
   description: Ortelius Docs
   annotations:
-    'backstage.io/kubernetes-id': ortelius-docs
+    backstage.io/kubernetes-id: ortelius-docs
+    github.com/project-slug: ortelius/ortelius-docs
+    github.com/project-readme-path: README.md
   tags:
     - platform
   links:
@@ -42,8 +47,10 @@ metadata:
   name: ingress-nginx
   description: Ortelius Cluster Ingress
   annotations:
-    'backstage.io/kubernetes-id': ingress-nginx
-    'argocd/app-name': ingress-nginx
+    github.com/project-slug: ortelius/ortelius-docs
+    github.com/project-readme-path: README.md
+    backstage.io/kubernetes-id: ingress-nginx
+    argocd/app-name: ingress-nginx
   tags:
     - platform
 spec:
