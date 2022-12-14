@@ -47,7 +47,7 @@ metadata:
   name: ingress-nginx
   description: Ortelius Cluster Ingress
   annotations:
-    github.com/project-slug: ortelius/ortelius-docs
+    github.com/project-slug: ortelius/ortelius-kubernetes
     github.com/project-readme-path: README.md
     backstage.io/kubernetes-id: ingress-nginx
     argocd/app-name: ingress-nginx
