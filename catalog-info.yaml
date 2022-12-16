@@ -91,3 +91,24 @@ spec:
   owner: user:guest
   lifecycle: production
 ---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ortelius-docs
+  description: Ortelius Docs
+  annotations:
+    backstage.io/kubernetes-id: backstage-frontend
+    github.com/project-slug: ortelius/backstage
+    github.com/project-readme-path: README.md
+  tags:
+    - platform
+  links:
+    - url: https://backstage.ortelius.io
+      title: Backstage Portal
+      icon: dashboard
+      type: admin-dashboard
+spec:
+  type: service
+  owner: user:guest
+  lifecycle: production
+---
