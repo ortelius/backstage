@@ -65,7 +65,6 @@ kubernetes:
           authProvider: 'serviceAccount'
           skipTLSVerify: true
           skipMetricsLookup: true
-
 argocd:
   username: ${ARGOCD_USERNAME}
   password: ${ARGOCD_PASSWORD}
@@ -97,3 +96,7 @@ catalog:
       target: https://github.com/ortelius/backstage/blob/main/catalog-info.yaml
       rules:
         - allow: [User, Group]
+    - type: github-org
+      target: https://github.com/basiqio
+      rules:
+        - allow: [Group, User]

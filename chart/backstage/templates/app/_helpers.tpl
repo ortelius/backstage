@@ -11,6 +11,7 @@ Common labels
 {{- define "backstage.appLabels" -}}
 {{ include "backstage.labels" . }}
 app.kubernetes.io/component: app
+backstage.io/kubernetes-id: backstage-frontend
 {{- end }}
 
 {{/*
@@ -19,6 +20,7 @@ Selector labels
 {{- define "backstage.appSelectorLabels" -}}
 {{ include "backstage.selectorLabels" . }}
 app.kubernetes.io/component: app
+backstage.io/kubernetes-id: backstage-frontend
 {{- end }}
 
 {{/*
