@@ -12,6 +12,8 @@ permissions:
   id-token: write
   contents: write
   packages: write
+  security-events: write
+  actions: read
 
 jobs:
 
@@ -130,13 +132,13 @@ jobs:
         severity: 'CRITICAL'
 
     - name: Upload Trivy SARIF report to GitHub Security tab frontend
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: '${{matrix.arch}}-container-trivy-results-frontend.sarif'
         category: trivy-${{matrix.arch}}
 
     - name: Upload Trivy SARIF report to GitHub Security tab backend
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: '${{matrix.arch}}-container-trivy-results-backend.sarif'
         category: trivy-${{matrix.arch}}
