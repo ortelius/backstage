@@ -137,16 +137,6 @@ jobs:
         sarif_file: '${{matrix.arch}}-container-trivy-results-frontend.sarif'
         category: trivy-${{matrix.arch}}
 
-    - name: Upload Trivy SARIF report to GitHub Security tab backend
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: '${{matrix.arch}}-container-trivy-results-backend.sarif'
-        category: trivy-${{matrix.arch}}
-
-    - uses: anchore/sbom-action@v0
-      with:
-        image: "${IMAGE_NAME_BACKEND}"
-
     - uses: anchore/sbom-action@v0
       with:
         image: "${IMAGE_NAME_FRONTEND}"
