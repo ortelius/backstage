@@ -139,10 +139,6 @@ jobs:
 
     - uses: anchore/sbom-action@v0
       with:
-        image: "${IMAGE_NAME_BACKEND}"
-
-    - uses: anchore/sbom-action@v0
-      with:
         image: "${IMAGE_NAME_FRONTEND}"
 
     - name: Docker Push Frontend
