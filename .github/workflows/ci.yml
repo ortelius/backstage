@@ -139,15 +139,15 @@ jobs:
 
     - uses: anchore/sbom-action@v0
       with:
-        image: "${IMAGE_NAME_FRONTEND}"
+        image: "ghcr.io/ortelius/backstage/app:0.0.2"
 
     - name: Docker Push Frontend
       run: |-
-        docker push "${IMAGE_NAME_FRONTEND}" --all-tags
+        docker push --all-tags ghcr.io/ortelius/backstage/app
 
     - name: Docker Push Backend
       run: |-
-        docker push "${IMAGE_NAME_BACKEND}" --all-tags
+        docker push --all-tags ghcr.io/ortelius/backstage/backend
 
     - name: Get container info Frontend
       id: container_info_frontend
