@@ -129,6 +129,7 @@ spec:
               subPath: app-config.yaml
             - name: github-app-credentials
               mountPath: /app/github-app-credentials.yaml
+              subPath: github-app-credentials.yaml
           {{- with .Values.backend.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
