@@ -94,8 +94,20 @@ const routes = (
         <ReportIssue />
       </TechDocsAddons>
     </Route>
-    <Route path="/create" element={<ScaffolderPage />} />
-    <Route path="/api-docs" element={<ApiExplorerPage />} />
+    <Route
+      path="/create"
+      element={
+        <ScaffolderPage
+          groups={[
+            {
+              title: "Recommended",
+              filter: entity =>
+                entity?.metadata?.tags?.includes('recommended') ?? false,
+            },
+          ]}
+        />
+      }
+    />
     <Route
       path="/tech-radar"
       element={<TechRadarPage width={1500} height={800} />}
@@ -111,6 +123,7 @@ const routes = (
     <Route path="/search" element={<SearchPage />}>
       {searchPage}
     </Route>
+    <Route path="/api-docs" element={<ApiExplorerPage />} />
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
   </FlatRoutes>
