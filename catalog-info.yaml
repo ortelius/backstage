@@ -1,37 +1,4 @@
 apiVersion: backstage.io/v1alpha1
-kind: Domain
-metadata:
-  name: gitops
-  description: gitops
-spec:
-  owner: user:guest
----
-apiVersion: backstage.io/v1alpha1
-kind: System
-metadata:
-  name: gitops
-  description: gitops
-spec:
-  owner: gitops
-  domain: user:guest
----
-apiVersion: backstage.io/v1alpha1
-kind: Resource
-metadata:
-  name: Backstage Database
-  description: Backstage Postgresql Database
-  annotations:
-    github.com/project-slug: ortelius/ortelius-kubernetes
-    github.com/project-readme-path: README.md
-  tags:
-    - platform
-  spec:
-    type: database
-    owner: user:guest
-    system: gitops
-    lifecycle: production
----
-apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ortelius-www
@@ -67,44 +34,6 @@ metadata:
   links:
     - url: https://docs.ortelius.io/
       title: Docs
-      icon: dashboard
-      type: admin-dashboard
-spec:
-  type: service
-  owner: user:guest
-  lifecycle: production
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: ingress-nginx
-  description: Ortelius Cluster Ingress
-  annotations:
-    github.com/project-slug: ortelius/ortelius-kubernetes
-    github.com/project-readme-path: README.md
-    backstage.io/kubernetes-id: ingress-nginx
-    argocd/app-name: ingress-nginx
-  tags:
-    - platform
-spec:
-  type: service
-  owner: user:guest
-  lifecycle: production
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: ortelius-docs
-  description: Ortelius Docs
-  annotations:
-    backstage.io/kubernetes-id: backstage-frontend
-    github.com/project-slug: ortelius/backstage
-    github.com/project-readme-path: README.md
-  tags:
-    - platform
-  links:
-    - url: https://backstage.ortelius.io
-      title: Backstage Portal
       icon: dashboard
       type: admin-dashboard
 spec:
