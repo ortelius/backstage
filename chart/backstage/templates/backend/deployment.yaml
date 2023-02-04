@@ -127,6 +127,9 @@ spec:
             - mountPath: /app/app-config.yaml
               name: config
               subPath: app-config.yaml
+            - name: github-app-credentials
+              mountPath: /app/github-app-credentials.yaml
+              subPath: github-app-credentials.yaml
           {{- with .Values.backend.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
@@ -135,6 +138,10 @@ spec:
         - name: config
           configMap:
             name: {{ include "backstage.backendConfigName" . }}
+        - name: github-app-credentials
+          secret:
+            secretName: github-app-credentials
+            optional: true
       {{- with .Values.backend.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

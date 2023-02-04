@@ -14,7 +14,7 @@ export default async function createPlugin(
   );
   builder.addEntityProvider(
     GithubOrgEntityProvider.fromConfig(env.config, {
-      id: 'production',
+      id: 'development',
       orgUrl: 'https://github.com/ortelius',
       logger: env.logger,
       schedule: env.scheduler.createScheduledTaskRunner({
@@ -27,6 +27,3 @@ export default async function createPlugin(
   await processingEngine.start();
   return router;
 }
-
-// The org URL below needs to match a configured integrations.github entry
-// specified in your app-config.

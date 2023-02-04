@@ -9,13 +9,13 @@ auth:
   providers:
     github:
       development:
-        clientId: ${GITHUB_CLIENT_ID}
-        clientSecret: ${GITHUB_CLIENT_SECRET}
+        clientId: ${GITHUB_OAUTH_CLIENT_ID}
+        clientSecret: ${GITHUB_OAUTH_CLIENT_SECRET}
     integrations:
       github:
         - host: github.com
           apps:
-            - $include: github-app-backstage-ortelius-credentials.yaml
+            - $include: github-app-credentials.yaml
 
 backend:
   # Note that the baseUrl should be the URL that the browser and other clients
@@ -65,7 +65,6 @@ kubernetes:
           authProvider: 'serviceAccount'
           skipTLSVerify: true
           skipMetricsLookup: true
-
 argocd:
   username: ${ARGOCD_USERNAME}
   password: ${ARGOCD_PASSWORD}
@@ -100,4 +99,8 @@ catalog:
     - type: url
       target: https://github.com/ortelius/backstage/blob/main/catalog-info.yaml
       rules:
-        - allow: [User, Group]
+        - allow: [Component, System, API, Resource, Location, Domain, Location]
+    - type: github-org
+      target: https://github.com/ortelius
+      rules:
+        - allow: [Group, User]

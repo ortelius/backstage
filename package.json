@@ -20,7 +20,8 @@
     "lint:all": "backstage-cli repo lint",
     "prettier:check": "prettier --check .",
     "create-plugin": "backstage-cli create-plugin --scope internal",
-    "new": "backstage-cli new --scope internal"
+    "new": "backstage-cli new --scope internal",
+    "upgrade": "yarn backstage-cli versions:bump"
   },
   "workspaces": {
     "packages": [
