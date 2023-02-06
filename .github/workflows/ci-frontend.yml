@@ -1,12 +1,14 @@
-name: CI
+name: CI Frontend
 
 on:
   push:
     branches:
       - main
-    paths-ignore:
-      - catalog-info.yaml
-      - app-config.production.yaml
+    paths:
+      - 'packages/app/**'
+      - 'Dockerfile.app'
+      - 'yarn.lock'
+      - 'package.json'
 
 permissions:
   id-token: write
@@ -23,11 +25,9 @@ jobs:
     env:
       COSIGN_EXPERIMENTAL: 1
       IMAGE_NAME_FRONTEND: ghcr.io/ortelius/backstage/app:0.0.2
-      IMAGE_NAME_BACKEND: ghcr.io/ortelius/backstage/backend:0.0.2
 
     outputs:
       image-digest-frontend: ${{ steps.container_info.outputs.image-digest-frontend }}
-      image-digest-backend: ${{ steps.container_info.outputs.image-digest-backend }}
 
     steps:
     - uses: actions/checkout@v3
@@ -60,14 +60,6 @@ jobs:
         retention-days: 5
         if-no-files-found: error
 
-    - name: Upload backend artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: backend
-        path: packages/backend/dist
-        retention-days: 5
-        if-no-files-found: error
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
@@ -94,19 +86,6 @@ jobs:
          --label "org.opencontainers.image.vendor=ortelius" \
           .
 
-    - name: Build & Push Docker Image Backend
-      run: |
-        revision="$(git rev-parse "${GITHUB_REF_NAME:-HEAD}")"
-        DOCKER_BUILDKIT=1 docker build \
-         -t "${IMAGE_NAME_BACKEND}" -f ./Dockerfile.backend \
-         --label "org.opencontainers.image.source=https://github.com/ortelius/backstage/packages/backend" \
-         --label "org.opencontainers.image.created=$(date --iso-8601=seconds)" \
-         --label "org.opencontainers.image.title=Ortelius Backstage Backend" \
-         --label "org.opencontainers.image.revision=${revision}" \
-         --label "org.opencontainers.image.version=${GITHUB_REF_NAME}" \
-         --label "org.opencontainers.image.vendor=ortelius" \
-          .
-
     - name: Run Trivy vulnerability scanner frontend
       uses: aquasecurity/trivy-action@master
       with:
@@ -114,18 +93,6 @@ jobs:
         format: 'template'
         template: '@/contrib/sarif.tpl'
         output: '${{matrix.arch}}-container-trivy-results-frontend.sarif'
-        exit-code: '0'
-        ignore-unfixed: true
-        vuln-type: 'os,library'
-        severity: 'CRITICAL'
-
-    - name: Run Trivy vulnerability scanner backend
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'ghcr.io/ortelius/backstage/backend:0.0.2'
-        format: 'template'
-        template: '@/contrib/sarif.tpl'
-        output: '${{matrix.arch}}-container-trivy-results-backend.sarif'
         exit-code: '0'
         ignore-unfixed: true
         vuln-type: 'os,library'
@@ -145,18 +112,8 @@ jobs:
       run: |-
         docker push --all-tags ghcr.io/ortelius/backstage/app
 
-    - name: Docker Push Backend
-      run: |-
-        docker push --all-tags ghcr.io/ortelius/backstage/backend
-
     - name: Get container info Frontend
       id: container_info_frontend
       run: |
         image_digest="$(docker inspect "${IMAGE_NAME}" --format '{{ index .RepoDigests 0 }}' | awk -F '@' '{ print $2 }')"
         echo "::set-output name=image-digest-frontend::${image_digest}"
-
-    - name: Get container info Backend
-      id: container_info_backend
-      run: |
-        image_digest="$(docker inspect "${IMAGE_NAME}" --format '{{ index .RepoDigests 0 }}' | awk -F '@' '{ print $2 }')"
-        echo "::set-output name=image-digest-backend::${image_digest}"
