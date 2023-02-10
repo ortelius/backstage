@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'packages/backend/**'
-      - 'Dockerfile.app'
+      - 'Dockerfile.backend'
       - 'yarn.lock'
       - 'package.json'
 

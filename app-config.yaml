@@ -5,23 +5,15 @@ app:
 organization:
   name: Ortelius
 
+auth:
+  providers: {}
+
 backend:
-  # Used for enabling authentication, secret is shared by all backend plugins
-  # See https://backstage.io/docs/tutorials/backend-to-backend-auth for
-  # information on the format
-  # auth:
-  #   keys:
-  #     - secret: ${BACKEND_SECRET}
   baseUrl: https://backstage-backend.ortelius.io
   listen:
     port: 7007
-    # Uncomment the following host directive to bind to all IPv4 interfaces and
-    # not just the baseUrl hostname.
-    # host: 0.0.0.0
   csp:
     connect-src: ["'self'", 'http:', 'https:']
-    # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
-    # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
     origin: https://backstage.ortelius.io
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
@@ -47,7 +39,6 @@ backend:
         propagateCreateError: false
   cache:
     store: memory
-  # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
   github:
@@ -55,10 +46,6 @@ integrations:
       # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
       # about setting up the GitHub integration here: https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration
       token: ${GITHUB_TOKEN}
-    ### Example for how to add your GitHub Enterprise instance using the API:
-    # - host: ghe.example.net
-    #   apiBaseUrl: https://ghe.example.net/api/v3
-    #   token: ${GHE_TOKEN}
 
 argocd:
   username: ${ARGOCD_USERNAME}
@@ -69,20 +56,12 @@ argocd:
         - name: production
           url: ${ARGOCD_BASE_URL}
 
-# Reference documentation http://backstage.io/docs/features/techdocs/configuration
-# Note: After experimenting with basic setup, use CI/CD to generate docs
-# and an external cloud storage when deploying TechDocs for production use-case.
-# https://backstage.io/docs/features/techdocs/how-to-guides#how-to-migrate-from-techdocs-basic-to-recommended-deployment-approach
 techdocs:
   builder: 'local' # Alternatives - 'external'
   generator:
     runIn: 'docker' # Alternatives - 'local'
   publisher:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
-
-auth:
-  # see https://backstage.io/docs/auth/ to learn about auth providers
-  providers: {}
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
