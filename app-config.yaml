@@ -1,6 +1,6 @@
 app:
   title: Ortelius Catalog
-  baseUrl: https://backstage.ortelius.io
+  baseUrl: http://localhost:3000
 
 organization:
   name: Ortelius
@@ -9,13 +9,13 @@ auth:
   providers: {}
 
 backend:
-  baseUrl: https://backstage-backend.ortelius.io
+  baseUrl: http://localhost:7007
   listen:
     port: 7007
   csp:
     connect-src: ["'self'", 'http:', 'https:']
   cors:
-    origin: https://backstage.ortelius.io
+    origin: http://localhost:3000
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
 
