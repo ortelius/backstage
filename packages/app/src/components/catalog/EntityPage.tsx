@@ -74,6 +74,12 @@ import {
   isSecurityInsightsAvailable,
 } from '@roadiehq/backstage-plugin-security-insights';
 
+import {
+  EntityPrometheusContent,
+  EntityPrometheusAlertCard,
+  EntityPrometheusGraphCard,
+} from '@roadiehq/backstage-plugin-prometheus';
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -170,6 +176,13 @@ const overviewContent = (
       </EntitySwitch.Case>
     </EntitySwitch>
 
+    <Grid item md={8}>
+      <EntityPrometheusAlertCard />
+    </Grid>
+    <Grid item md={6}>
+      <EntityPrometheusGraphCard />
+    </Grid>
+
   </Grid>
 );
 
@@ -228,6 +241,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent refreshIntervalMs={30000} />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/prometheus" title="Prometheus">
+      <EntityPrometheusContent />
     </EntityLayout.Route>
 
   </EntityLayout>

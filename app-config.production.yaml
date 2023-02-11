@@ -78,6 +78,14 @@ argocd:
       instances:
         - name: production
           url: ${ARGOCD_BASE_URL}
+prometheus:
+  proxyPath: /prometheus/api
+
+proxy:
+  '/prometheus/api':
+    target: target: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/
+    changeOrigin: true
+    secure: false
 
 techdocs:
   builder: 'local' # Alternatives - 'external'
