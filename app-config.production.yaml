@@ -88,11 +88,17 @@ proxy:
     secure: false
 
 techdocs:
-  builder: 'local' # Alternatives - 'external'
+  builder: 'external'
   generator:
-    runIn: 'docker' # Alternatives - 'local'
+    runIn: 'local'
   publisher:
-    type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
+    type: 'awsS3'
+    awsS3:
+      bucketName: 'ortelius-techdocs-dev'
+      region: ${AWS_DEFAULT_REGION}
+      credentials:
+        accessKeyId: ${AWS_ACCESS_KEY_ID}
+        secretAccessKey: ${AWS_ACCESS_KEY_SECRET}
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
