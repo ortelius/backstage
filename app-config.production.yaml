@@ -82,6 +82,13 @@ prometheus:
   proxyPath: /prometheus/api
 
 proxy:
+  '/argocd/api':
+    target: ${ARGOCD_BASE_URL}/api/v1/
+    changeOrigin: true
+    secure: false
+    headers:
+      Cookie:
+        $env: ${ARGOCD_AUTH_TOKEN}
   '/prometheus/api':
     target: target: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/
     changeOrigin: true
@@ -112,6 +119,10 @@ catalog:
   locations:
     - type: url
       target: https://github.com/ortelius/ortelius-kubernetes/blob/main/catalog-info.yaml
+      rules:
+        - allow: [Component, System, API, Resource, Location, Domain, Location, Group]
+    - type: url
+      target: https://github.com/ortelius/ortelius-kubernetes/blob/main/podtato-head-catalog-info.yaml
       rules:
         - allow: [Component, System, API, Resource, Location, Domain, Location, Group]
     - type: url
