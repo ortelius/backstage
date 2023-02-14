@@ -103,7 +103,7 @@ proxy:
       Cookie:
         $env: ${ARGOCD_AUTH_TOKEN}
   '/prometheus/api':
-    target: target: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/
+    target: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/
     changeOrigin: true
     secure: false
 
