@@ -9,6 +9,7 @@ on:
       - 'Dockerfile.backend'
       - 'yarn.lock'
       - 'package.json'
+      - 'app-config.production.yaml'
 
 permissions:
   id-token: write
