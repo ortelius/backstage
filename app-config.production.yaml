@@ -81,19 +81,6 @@ argocd:
 prometheus:
   proxyPath: /prometheus/api
 
-proxy:
-  '/argocd/api':
-    target: ${ARGOCD_BASE_URL}/api/v1/
-    changeOrigin: true
-    secure: false
-    headers:
-      Cookie:
-        $env: ${ARGOCD_AUTH_TOKEN}
-  '/prometheus/api':
-    target: target: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/
-    changeOrigin: true
-    secure: false
-
 techdocs:
   builder: 'external'
   generator:
@@ -106,6 +93,19 @@ techdocs:
       credentials:
         accessKeyId: ${AWS_ACCESS_KEY_ID}
         secretAccessKey: ${AWS_ACCESS_KEY_SECRET}
+
+proxy:
+  '/argocd/api':
+    target: ${ARGOCD_BASE_URL}/api/v1/
+    changeOrigin: true
+    secure: false
+    headers:
+      Cookie:
+        $env: ${ARGOCD_AUTH_TOKEN}
+  '/prometheus/api':
+    target: target: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/
+    changeOrigin: true
+    secure: false
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
