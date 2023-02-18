@@ -24,7 +24,7 @@ jobs:
 
     env:
       COSIGN_EXPERIMENTAL: 1
-      IMAGE_NAME_FRONTEND: ghcr.io/ortelius/backstage/app:0.0.2
+      IMAGE_NAME_FRONTEND: ghcr.io/ortelius/backstage/app:0.0.1
 
     outputs:
       image-digest-frontend: ${{ steps.container_info.outputs.image-digest-frontend }}
@@ -89,7 +89,7 @@ jobs:
     - name: Run Trivy vulnerability scanner frontend
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: 'ghcr.io/ortelius/backstage/app:0.0.2'
+        image-ref: 'ghcr.io/ortelius/backstage/app:0.0.1'
         format: 'template'
         template: '@/contrib/sarif.tpl'
         output: '${{matrix.arch}}-container-trivy-results-frontend.sarif'
@@ -106,7 +106,7 @@ jobs:
 
     - uses: anchore/sbom-action@v0
       with:
-        image: "ghcr.io/ortelius/backstage/app:0.0.2"
+        image: "ghcr.io/ortelius/backstage/app:0.0.1"
 
     - name: Docker Push Frontend
       run: |-
