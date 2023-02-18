@@ -25,7 +25,7 @@ jobs:
 
     env:
       COSIGN_EXPERIMENTAL: 1
-      IMAGE_NAME_BACKEND: ghcr.io/ortelius/backstage/backend:0.0.2
+      IMAGE_NAME_BACKEND: ghcr.io/ortelius/backstage/backend:0.0.1
 
     outputs:
       image-digest-backend: ${{ steps.container_info.outputs.image-digest-backend }}
@@ -90,7 +90,7 @@ jobs:
     - name: Run Trivy vulnerability scanner backend
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: 'ghcr.io/ortelius/backstage/backend:0.0.2'
+        image-ref: 'ghcr.io/ortelius/backstage/backend:0.0.1'
         format: 'template'
         template: '@/contrib/sarif.tpl'
         output: '${{matrix.arch}}-container-trivy-results-backend.sarif'
