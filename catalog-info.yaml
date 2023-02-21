@@ -1,4 +1,22 @@
 apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: bradmccoydev
+  namespace: default
+  tags:
+    - hi
+  links:
+    - url: blog.bradmccoy.io
+      title: Blog
+      icon: dashboard
+spec:
+  profile:
+    displayName: Brad McCoy
+    email: bradmccoydev@gmail.com
+    picture: https://avatars.githubusercontent.com/u/25817813?s=400&v=4
+  memberOf: [dev]
+---
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: ortelius-www
