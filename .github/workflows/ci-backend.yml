@@ -19,8 +19,30 @@ permissions:
   actions: read
 
 jobs:
+  release-please:
+    permissions:
+      contents: write  # for google-github-actions/release-please-action to create release commit
+      pull-requests: write  # for google-github-actions/release-please-action to create release PR
+    runs-on: ubuntu-latest
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    # Release-please creates a PR that tracks all changes
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3
+
+      - uses: google-github-actions/release-please-action@ee9822ec2c397e8a364d634464339ac43a06e042 # v3
+        id: release
+        with:
+          command: manifest
+          token: ${{secrets.GITHUB_TOKEN}}
+          default-branch: main
 
   build:
+    if: needs.release-please.outputs.releases_created == 'true'
+    needs:
+      - release-please
     runs-on: ubuntu-latest
 
     env:
@@ -31,7 +53,8 @@ jobs:
       image-digest-backend: ${{ steps.container_info.outputs.image-digest-backend }}
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3
 
     - name: Setup Nodejs and npm
       uses: actions/setup-node@v2
@@ -102,6 +125,19 @@ jobs:
     - name: Docker Push Backend
       run: |-
         docker push --all-tags ghcr.io/ortelius/backstage/backend
+
+    - name: Generate SBOM
+      uses: anchore/sbom-action@448520c4f19577ffce70a8317e619089054687e3 # v0.13.4
+      with:
+        image: ${{ env.IMAGE_TAG }}
+        artifact-name: sbom-backstage
+        output-file: ./sbom-backstage.spdx.json
+
+    - name: Attach SBOM to release
+      uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v1
+      with:
+        tag_name: ${{ needs.release-please.outputs.tag_name }}
+        files: ./sbom-backstage.spdx.json
 
     - name: Get container info Backend
       id: container_info_backend
