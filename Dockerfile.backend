@@ -6,7 +6,6 @@
 # yarn install
 # yarn tsc
 # yarn build
-#
 
 FROM node:16-bullseye-slim
 
