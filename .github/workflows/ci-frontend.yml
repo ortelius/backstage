@@ -9,8 +9,7 @@ on:
       - 'Dockerfile.app'
       - 'yarn.lock'
       - 'package.json'
-    paths-ignore:
-      - "**.md"
+      - '!CHANGELOG.md'
 
 permissions:
   id-token: write
