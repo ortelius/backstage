@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.3](https://github.com/ortelius/backstage/compare/root-v0.0.2...root-v0.0.3) (2023-03-31)
+
+
+### Features
+
+* add release please ([f8ee346](https://github.com/ortelius/backstage/commit/f8ee346bbc03705a375877eb6a2420815aeac843))
+* add release please ([3e2bc90](https://github.com/ortelius/backstage/commit/3e2bc9097ec4155b43fcd156203e376f224b5cb2))
+* add release please ([a4139c1](https://github.com/ortelius/backstage/commit/a4139c15288c83bc4893d1f7c865c43db11534c7))
+
 ## [0.0.2](https://github.com/ortelius/backstage/compare/root-v0.0.1...root-v0.0.2) (2023-03-31)
 
 
