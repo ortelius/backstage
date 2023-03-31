@@ -1,12 +1,3 @@
-# This dockerfile builds an image for the backend package.
-# It should be executed with the root of the repo as docker context.
-#
-# Before building this image, be sure to have run the following commands in the repo root:
-#
-# yarn install
-# yarn tsc
-# yarn build
-
 FROM node:16-bullseye-slim
 
 LABEL org.opencontainers.image.source=https://github.com/ortelius/backstage/packages/backend

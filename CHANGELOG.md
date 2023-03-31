@@ -115,5 +115,3 @@
 * update image name ([71d17ae](https://github.com/ortelius/backstage/commit/71d17aec300e60a29491ff8cd06ff21829b404e5))
 * update image name ([f8103fe](https://github.com/ortelius/backstage/commit/f8103fec192452f4573704ffed35caa8e0559531))
 * update image name ([39a24f3](https://github.com/ortelius/backstage/commit/39a24f3c049bf1d5d42dde9efa4bb5d36b628f6a))
-
-## ChangeLog

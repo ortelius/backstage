@@ -10,8 +10,7 @@ on:
       - 'yarn.lock'
       - 'package.json'
       - 'app-config.production.yaml'
-    paths-ignore:
-      - "**.md"
+      - '!CHANGELOG.md'
 
 permissions:
   id-token: write
