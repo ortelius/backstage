@@ -6,6 +6,8 @@ on:
     paths:
       - 'chart/**'
       - '!chart/backstage/templates/README.md'
+    paths-ignore:
+      - "**.md"
 
 jobs:
   release:

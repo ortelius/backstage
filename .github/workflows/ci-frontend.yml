@@ -9,6 +9,8 @@ on:
       - 'Dockerfile.app'
       - 'yarn.lock'
       - 'package.json'
+    paths-ignore:
+      - "**.md"
 
 permissions:
   id-token: write
