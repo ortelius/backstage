@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.4](https://github.com/ortelius/backstage/compare/root-v0.0.3...root-v0.0.4) (2023-04-26)
+
+
+### Other
+
+* bump version ([ce5ee5f](https://github.com/ortelius/backstage/commit/ce5ee5f857c26f563023ec56a35b255878506368))
+* **deps:** bump nunjucks from 3.2.3 to 3.2.4 ([#135](https://github.com/ortelius/backstage/issues/135)) ([2abfe5f](https://github.com/ortelius/backstage/commit/2abfe5f5b6415b9872e86700bc16cfdedafc301d))
+* **deps:** bump vm2 from 3.9.11 to 3.9.15 ([#132](https://github.com/ortelius/backstage/issues/132)) ([f5c2f55](https://github.com/ortelius/backstage/commit/f5c2f555168deeef643353f35362a41c9beb7b44))
+* **deps:** bump vm2 from 3.9.15 to 3.9.16 ([#133](https://github.com/ortelius/backstage/issues/133)) ([9351c17](https://github.com/ortelius/backstage/commit/9351c173c4b8177ff38c3bea7fb83e61588e7fc5))
+* **deps:** bump vm2 from 3.9.16 to 3.9.17 ([#134](https://github.com/ortelius/backstage/issues/134)) ([064f183](https://github.com/ortelius/backstage/commit/064f183ecdbc8f0c660db01bee00eba8c4ef0835))
+* update kubernetes ([ae487ac](https://github.com/ortelius/backstage/commit/ae487ac5e6e8be622e85c7a2671b1ab93603cc53))
+
 ## [0.0.3](https://github.com/ortelius/backstage/compare/root-v0.0.2...root-v0.0.3) (2023-03-31)
 
 
