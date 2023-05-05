@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.0.5](https://github.com/ortelius/backstage/compare/root-v0.0.4...root-v0.0.5) (2023-05-05)
+
+
+### Features
+
+* test gpg key ([7fe5104](https://github.com/ortelius/backstage/commit/7fe5104b12170bd910eba3a77dd42d8b25abf8ea))
+* test gpg key 1 ([4bc4a79](https://github.com/ortelius/backstage/commit/4bc4a79d590611eecb24466194cd911153a3b4f2))
+* test gpg key 2 ([424ef61](https://github.com/ortelius/backstage/commit/424ef61f033c59f49ba06344e0dd2e33d0e6ce7e))
+* test gpg key 3 ([c31a33b](https://github.com/ortelius/backstage/commit/c31a33bcb446bf8d33b282b2e3a4ecc2fc361d12))
+* test gpg key 3 ([59fcc55](https://github.com/ortelius/backstage/commit/59fcc55873607eaa2e74a76be178f182a3e89715))
+* test gpg key 4 ([2ba40c1](https://github.com/ortelius/backstage/commit/2ba40c15d3fc1f712e96cf1651a7d07a924df4a4))
+* test gpg key 5 ([fd78992](https://github.com/ortelius/backstage/commit/fd78992854ae4baf2fbef03b8f58d7d88b94621e))
+* test gpg key 6 ([6349657](https://github.com/ortelius/backstage/commit/63496579e3e20c64907826e606b56d5784827b44))
+
+
+### Other
+
+* update packages ([a915308](https://github.com/ortelius/backstage/commit/a9153088e2c4caf68ac29b067428cb854466cf77))
+
 ## [0.0.4](https://github.com/ortelius/backstage/compare/root-v0.0.3...root-v0.0.4) (2023-04-26)
 
 
