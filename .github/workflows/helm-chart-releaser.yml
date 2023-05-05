@@ -31,19 +31,33 @@ jobs:
         with:
           version: latest
 
-      - name: Prepare keys for signing
-        env:
-          SIGNING_KEY_BASE64: ${{ secrets.HELM_SIGNING_PRIVATE_KEY }}
-          SIGNING_KEY_PASSPHRASE_BASE64: ${{ secrets.HELM_SIGNING_PRIVATE_KEY_PASSPHRASE }}
-          KEY_PATH: ".gpg-dir"
-          SIGNING_KEY_PATH: ".gpg-dir/secring.gpg"
-          SIGNING_KEY_PASSPHRASE_PATH: ".gpg-dir/passphrase"
+      # - name: Prepare keys for signing
+      #   env:
+      #     SIGNING_KEY_BASE64: ${{ secrets.HELM_SIGNING_PRIVATE_KEY }}
+      #     SIGNING_KEY_PASSPHRASE_BASE64: ${{ secrets.HELM_SIGNING_PRIVATE_KEY_PASSPHRASE }}
+      #     KEY_PATH: ".gpg-dir"
+      #     SIGNING_KEY_PATH: ".gpg-dir/secring.gpg"
+      #     SIGNING_KEY_PASSPHRASE_PATH: ".gpg-dir/passphrase"
+      #   run: |
+      #     mkdir "$KEY_PATH"
+      #     base64 -d <<< "$SIGNING_KEY_BASE64" > "$SIGNING_KEY_PATH"
+      #     base64 -d <<< "$SIGNING_KEY_PASSPHRASE_BASE64" > "$SIGNING_KEY_PASSPHRASE_PATH"
+      #     echo "CR_PASSPHRASE_FILE=$SIGNING_KEY_PASSPHRASE_PATH" >> "$GITHUB_ENV"
+      #     echo "CR_KEYRING=$SIGNING_KEY_PATH" >> "$GITHUB_ENV"
+
+      - name: Prepare GPG key
         run: |
-          mkdir "$KEY_PATH"
-          base64 -d <<< "$SIGNING_KEY_BASE64" > "$SIGNING_KEY_PATH"
-          base64 -d <<< "$SIGNING_KEY_PASSPHRASE_BASE64" > "$SIGNING_KEY_PASSPHRASE_PATH"
-          echo "CR_PASSPHRASE_FILE=$SIGNING_KEY_PASSPHRASE_PATH" >> "$GITHUB_ENV"
-          echo "CR_KEYRING=$SIGNING_KEY_PATH" >> "$GITHUB_ENV"
+          gpg_dir=.cr-gpg
+          mkdir "$gpg_dir"
+          keyring="$gpg_dir/secring.gpg"
+          base64 -d <<< "$HELM_SIGNING_PRIVATE_KEY" > "$keyring"
+          passphrase_file="$gpg_dir/passphrase"
+          echo "$HELM_SIGNING_PRIVATE_KEY_PASSPHRASE" > "$passphrase_file"
+          echo "CR_PASSPHRASE_FILE=$passphrase_file" >> "$GITHUB_ENV"
+          echo "CR_KEYRING=$keyring" >> "$GITHUB_ENV"
+        env:
+          GPG_KEYRING_BASE64: "${{ secrets.HELM_SIGNING_PRIVATE_KEY }}"
+          GPG_PASSPHRASE: "${{ secrets.HELM_SIGNING_PRIVATE_KEY_PASSPHRASE }}"
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@be16258da8010256c6e82849661221415f031968 #v1.5.0
