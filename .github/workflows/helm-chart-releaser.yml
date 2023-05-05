@@ -9,17 +9,15 @@ on:
 
 jobs:
   release:
-    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
-    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-HELM_INDEXER_TOKEN
     permissions:
       contents: write # needed to write releases
       packages: write # needed for ghcr access
       id-token: write # needed for keyless signing
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
         with:
           fetch-depth: 0
 
@@ -27,43 +25,30 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
       - name: Install Helm
-        uses: azure/setup-helm@v3
+        uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3.5
         with:
           version: latest
 
+      - name: Prepare keys for signing
+        env:
+          SIGNING_KEY_BASE64: ${{ secrets.HELM_SIGNING_PRIVATE_KEY }}
+          SIGNING_KEY_PASSPHRASE_BASE64: ${{ secrets.HELM_SIGNING_PRIVATE_KEY_PASSPHRASE }}
+          KEY_PATH: ".gpg-dir"
+          SIGNING_KEY_PATH: ".gpg-dir/secring.gpg"
+          SIGNING_KEY_PASSPHRASE_PATH: ".gpg-dir/passphrase"
+        run: |
+          mkdir "$KEY_PATH"
+          base64 -d <<< "$SIGNING_KEY_BASE64" > "$SIGNING_KEY_PATH"
+          base64 -d <<< "$SIGNING_KEY_PASSPHRASE_BASE64" > "$SIGNING_KEY_PASSPHRASE_PATH"
+          echo "CR_PASSPHRASE_FILE=$SIGNING_KEY_PASSPHRASE_PATH" >> "$GITHUB_ENV"
+          echo "CR_KEYRING=$SIGNING_KEY_PATH" >> "$GITHUB_ENV"
+
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.4.1
+        uses: helm/chart-releaser-action@be16258da8010256c6e82849661221415f031968 #v1.5.0
         with:
           charts_dir: chart
+          config: cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
-      # see https://github.com/helm/chart-releaser/issues/183
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: sigstore/cosign-installer@main
-      - name: Push charts to GHCR
-        env:
-          COSIGN_EXPERIMENTAL: 1
-        # when filling gaps with previously released charts, cr would create
-        # nothing in .cr-release-packages/, and the original globbing character
-        # would be preserved, causing a non-zero exit. Set nullglob to fix this
-        run: |
-          shopt -s nullglob
-          for pkg in .cr-release-packages/*; do
-            if [ -z "${pkg:-}" ]; then
-              break
-            fi
-            helm push "${pkg}" oci://ghcr.io/${GITHUB_REPOSITORY_OWNER}/charts
-            file=${pkg##*/}
-            name=${file%-*}
-            version=${file%.*}
-            version=${version#*-}
-            cosign sign ghcr.io/${GITHUB_REPOSITORY_OWNER}/charts/"${name}":"${version}"
-          done
