@@ -1,7 +1,11 @@
 FROM nginx:mainline
 
-LABEL org.opencontainers.image.source=https://github.com/ortelius/backstage/packages/app
-LABEL org.opencontainers.image.description="Ortelius Backstage Frontend"
+LABEL org.opencontainers.image.source="https://github.com/ortelius/backstage/packages/app" \
+    org.opencontainers.image.title="Ortelius Backstage Frontend" \
+    org.opencontainers.image.vendor='bradmccoydev' \
+    org.opencontainers.image.licenses='Apache-2.0' \
+    org.opencontainers.image.description='CDEvents Controller' \ 
+    org.opencontainers.image.description="Ortelius Backstage Frontend"
 
 RUN apt-get update && apt-get -y install jq && rm -rf /var/lib/apt/lists/*
 

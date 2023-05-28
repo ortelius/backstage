@@ -1,7 +1,10 @@
 FROM node:16-bullseye-slim
 
-LABEL org.opencontainers.image.source=https://github.com/ortelius/backstage/packages/backend
-LABEL org.opencontainers.image.description="Ortelius Backstage Backend"
+LABEL org.opencontainers.image.source="https://github.com/ortelius/backstage/packages/backend" \
+    org.opencontainers.image.title="Ortelius Backstage Backend" \
+    org.opencontainers.image.vendor='bradmccoydev' \
+    org.opencontainers.image.licenses='Apache-2.0' \
+    org.opencontainers.image.description="Ortelius Backstage Backend"
 
 # Install sqlite3 dependencies. You can skip this if you don't use sqlite3 in the image,
 # in which case you should also move better-sqlite3 to "devDependencies" in package.json.
