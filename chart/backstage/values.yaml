@@ -91,7 +91,7 @@ app:
     ingressClassName: ""
     # -- App ingress hosts.
     hosts:
-      - backstage.ortelius.io
+      - backstage.bradmccoy.io
     # -- App ingress TLS configuration
     tls: []
 
@@ -263,15 +263,15 @@ postgresql:
 appConfig:
   app:
     title: Ortelius Backstage
-    baseUrl: https://backstage.ortelius.io
+    baseUrl: https://backstage.bradmccoy.io
   organization:
     name: ortelius
   backend:
-    baseUrl: https://backstage.ortelius.io
+    baseUrl: https://backstage.bradmccoy.io
     listen:
       port: 7007
     cors:
-      origin: https://backstage.ortelius.io
+      origin: https://backstage.bradmccoy.io
       methods: [GET, POST, PUT, DELETE]
       credentials: true
     database:

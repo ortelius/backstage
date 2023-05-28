@@ -1,6 +1,6 @@
 app:
   title: Ortelius
-  baseUrl: https://backstage.ortelius.io
+  baseUrl: https://backstage.bradmccoy.io
 
 organization:
   name: Ortelius
@@ -19,14 +19,14 @@ auth:
             - $include: github-app-credentials.yaml
 
 backend:
-  baseUrl: https://backstage-backend.ortelius.io
+  baseUrl: https://backstage-backend.bradmccoy.io
   listen:
     port: 7007
     host: 0.0.0.0
   csp:
     connect-src: ["'self'", 'http:', 'https:']
   cors:
-    origin: https://backstage.ortelius.io
+    origin: https://backstage.bradmccoy.io
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
 
