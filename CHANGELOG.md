@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.0.6](https://github.com/ortelius/backstage/compare/root-v0.0.5...root-v0.0.6) (2023-06-06)
+
+
+### Other
+
+* **deps:** bump vm2 from 3.9.17 to 3.9.18 ([#148](https://github.com/ortelius/backstage/issues/148)) ([457e653](https://github.com/ortelius/backstage/commit/457e6539b5ee4ec74085eb6e48c12c09c66f0e68))
+* sign helm chart ([b3b8383](https://github.com/ortelius/backstage/commit/b3b838307317cb9bad4975b21c3b41d7d8fe69ff))
+* update ingress ([0a48ea0](https://github.com/ortelius/backstage/commit/0a48ea019c5a3517c5889e2f5fef0ef9fd9979b7))
+* update ingress ([7ff3d93](https://github.com/ortelius/backstage/commit/7ff3d935b2eb706bed9d24a901731895bca4bf44))
+* update k8s plugin ([3812bb6](https://github.com/ortelius/backstage/commit/3812bb6f2ef025f5b00650afcc24e71f7053b7f9))
+
 ## [0.0.5](https://github.com/ortelius/backstage/compare/root-v0.0.4...root-v0.0.5) (2023-05-05)
 
 
