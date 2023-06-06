@@ -70,6 +70,10 @@ kubernetes:
           authProvider: 'serviceAccount'
           skipTLSVerify: true
           skipMetricsLookup: true
+          customResources:
+            - group: 'core.k8sgpt.ai'
+              apiVersion: 'v1alpha1'
+              plural: 'results'
 argocd:
   username: ${ARGOCD_USERNAME}
   password: ${ARGOCD_PASSWORD}
